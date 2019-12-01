@@ -1,0 +1,14 @@
+{{template "header"}}
+<form method="POST" action="/index">
+    <textarea name="para" class="textarea" placeholder="Write para to index here."></textarea>
+    <button type="submit" class="button is-success" style="margin-top: 20px">Submit</button>
+</form>
+
+{{if .}}
+
+<div class="notification is-success" style="margin-top: 20px">
+{{.}}
+</div>
+
+{{end}}
+{{template "footer"}}

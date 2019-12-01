@@ -1,0 +1,38 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Suppaa fast search</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-menu">
+    <div class="navbar-start" style="margin: auto">
+      <a class="navbar-item" href="/index">
+        Index
+      </a>
+
+      <a class="navbar-item" href="/search">
+        Search
+      </a>
+      <a class="navbar-item" href="/clear">
+        Clear
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <section class="columns is-mobile">
+    <div class="column is-4 is-offset-4 ">
+{{end}}
+
+{{define "footer"}}
+    </div>
+</section>
+  </body>
+</html>
+{{end}}
