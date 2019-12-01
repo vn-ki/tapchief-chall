@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -10,6 +11,7 @@ import (
 )
 
 func main() {
+	fmt.Println("Serving at http://localhost:8080")
 	r := mux.NewRouter()
 	indexTmpl := template.Must(template.ParseFiles("templates/index.gohtml", "templates/base.gohtml"))
 	searchTmpl := template.Must(template.ParseFiles("templates/search.gohtml", "templates/base.gohtml"))
