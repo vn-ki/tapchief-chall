@@ -5,13 +5,20 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/vn-ki/tapchief-chall/handlers"
 )
 
 func main() {
-	fmt.Println("Serving at http://localhost:8080")
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "8080"
+	}
+
+	fmt.Println("Serving at http://localhost:" + port)
 	r := mux.NewRouter()
 	indexTmpl := template.Must(template.ParseFiles("templates/index.gohtml", "templates/base.gohtml"))
 	searchTmpl := template.Must(template.ParseFiles("templates/search.gohtml", "templates/base.gohtml"))
@@ -24,6 +31,6 @@ func main() {
 	r.HandleFunc("/index", handlers.IndexHandler(indexTmpl))
 	r.HandleFunc("/search", handlers.SearchHandler(searchTmpl))
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 
 }
