@@ -21,6 +21,17 @@ go build
 
 Go to http://localhost:8080
 
+
+## Web UI
+
+Web UI has three buttons, Index, Search and Clear which are self explanatory.
+
+Index has a textarea which can be used to enter any paragraph which will then be indexed.
+
+The indexed data can then be searched using the search functionality.
+
+Clear will clear the indices and documents present.
+
 ## API
 
 ### POST: /api/index

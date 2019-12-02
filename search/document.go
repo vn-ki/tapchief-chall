@@ -5,7 +5,6 @@ import (
 )
 
 func storeDocument(dID string, data string) error {
-	//return ioutil.WriteFile(file, []byte(data), 0644)
 	documents.lock.Lock()
 	documents.documentMap[dID] = data
 	documents.lock.Unlock()
