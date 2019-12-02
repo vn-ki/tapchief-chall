@@ -4,7 +4,7 @@ import "strings"
 
 // Search searches for the word in the dictionary and return all the documents
 func Search(query string) ([]SearchResult, error) {
-	query = strings.ToLower(query)
+	query = strings.TrimSpace(strings.ToLower(query))
 
 	indices.lock.RLock()
 	searched, ok := indices.indexMap[query]
