@@ -1,3 +1,6 @@
+/* The functions in this file abstracts away storing and retreival of documents.
+ * Right now these use maps, but later can be changed to use some kind of permanent storage.
+ */
 package search
 
 import (

@@ -16,6 +16,9 @@ func Search(query string) ([]SearchResult, error) {
 
 	var retmap = map[string]SearchResult{}
 
+	// When we index, we store each position as a different indexed value.
+	// In this loop, we convert the positions from a single document into a
+	// single SearchResult object
 	for _, s := range searched {
 		data, err := getDocument(s.DocumentID)
 		if err != nil {
@@ -30,10 +33,15 @@ func Search(query string) ([]SearchResult, error) {
 		}
 	}
 
-	var ret []SearchResult
-	for _, value := range retmap {
-		ret = append(ret, value)
-	}
+	ret := mapToSlice(retmap)
 
 	return ret, nil
+}
+
+func mapToSlice(m map[string]SearchResult) []SearchResult {
+	var ret []SearchResult
+	for _, value := range m {
+		ret = append(ret, value)
+	}
+	return ret
 }

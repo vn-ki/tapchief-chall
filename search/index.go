@@ -17,22 +17,29 @@ func Index(para string) error {
 	documents := strings.Split(para, "\n\n")
 
 	for _, document := range documents {
-		dID := xid.New().String()
-
-		for idx, word := range strings.Fields(document) {
-			word = strings.ToLower(word)
-
-			indices.lock.Lock()
-			if _, ok := indices.indexMap[word]; !ok {
-				indices.indexMap[word] = make([]indexEntryType, 0)
-			}
-			indices.indexMap[word] = append(indices.indexMap[word], indexEntryType{dID, idx})
-			indices.lock.Unlock()
-		}
-		err := storeDocument(dID, document)
-		if err != nil {
+		if err := indexDocument(document); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func indexDocument(document string) error {
+	dID := xid.New().String()
+
+	for idx, word := range strings.Fields(document) {
+		word = strings.ToLower(word)
+
+		indices.lock.Lock()
+		if _, ok := indices.indexMap[word]; !ok {
+			indices.indexMap[word] = make([]indexEntryType, 0)
+		}
+		indices.indexMap[word] = append(indices.indexMap[word], indexEntryType{dID, idx})
+		indices.lock.Unlock()
+	}
+
+	if err := storeDocument(dID, document); err != nil {
+		return err
 	}
 	return nil
 }
