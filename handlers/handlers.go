@@ -72,12 +72,11 @@ func IndexHandler(tmpl *template.Template) http.HandlerFunc {
 			log.Infof("indexing %s", para[0])
 			search.Index(para[0])
 			tmpl.Execute(w, "Paragraph indexed")
-		} else {
-			err := tmpl.Execute(w, nil)
-			if err != nil {
-				log.Error(err)
-			}
 			return
+		}
+
+		if err := tmpl.Execute(w, nil); err != nil {
+			log.Error(err)
 		}
 	}
 }
@@ -100,12 +99,9 @@ func SearchHandler(tmpl *template.Template) http.HandlerFunc {
 			log.Info(results)
 			tmpl.Execute(w, results)
 			return
-		} else {
-			err := tmpl.Execute(w, "asdf")
-			if err != nil {
-				log.Error(err)
-			}
-			return
+		}
+		if err := tmpl.Execute(w, "asdf"); err != nil {
+			log.Error(err)
 		}
 	}
 }

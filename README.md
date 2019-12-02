@@ -21,11 +21,46 @@ Go to http://localhost:8080
 
 ## API
 
-### /api/index
+### POST: /api/index
 
-### /api/search
+Params:
 
-### /api/clear
+para: The paragraph to be indexed.
+
+
+This endpoint indexes a paragraph. A single paragraph can contain multiple documents seperated by 2 newlines (`"\n\n"`).
+
+### GET: /api/search
+
+Params:
+
+query: The word to be searched.
+
+This endpoint searches for a word in the all the documents and returns the documents which match with the position of the word.
+
+Example:
+
+```json
+{
+    "status":"success",
+    "response": [
+        {
+            "document":"para 3 aa dddf",
+            "position":[2]
+        },
+        {
+            "document":"para 2 aa dddf",
+            "position":[2]
+        }
+    ]
+}
+```
+
+### GET: /api/clear
+
+Params: None
+
+This endpoint clears all the indexed documents.
 
 
 ## Testing
