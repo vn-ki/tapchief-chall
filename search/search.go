@@ -26,6 +26,7 @@ func Search(query string) ([]SearchResult, error) {
 			retmap[s.DocumentID] = SearchResult{data, []int{s.Position}}
 		} else {
 			res.Position = append(res.Position, s.Position)
+			retmap[s.DocumentID] = res
 		}
 	}
 

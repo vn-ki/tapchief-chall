@@ -38,3 +38,45 @@ func TestClear(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, len(searched), 0, "no results should be found")
 }
+
+func TestIndexAndSearch2(t *testing.T) {
+	docu := `
+		blha blah 
+		Blah
+		`
+	ClearIndex()
+	err := Index(docu)
+	assert.Nil(t, err)
+	expected := SearchResult{docu, []int{1, 2}}
+
+	searched, err := Search("blah")
+	assert.Nil(t, err)
+	assert.Equal(t, len(searched), 1, "Both paragraphs should be returned")
+	assert.Equal(t, searched[0], expected, "searched and expeceted should be equal")
+}
+
+func TestIndexAndSearch3(t *testing.T) {
+	documents := []string{
+		`
+		blha blah 
+		Blah
+		`,
+		`
+		blha blah Blah
+		`,
+		`
+		blha blah Blah a
+		`,
+		`blah Blah`,
+	}
+	for _, docu := range documents {
+		ClearIndex()
+		err := Index(docu)
+		assert.Nil(t, err)
+
+		searched, err := Search("blah")
+		assert.Nil(t, err)
+		assert.Equal(t, len(searched), 1, "Both paragraphs should be returned")
+		assert.Equal(t, len(searched[0].Position), 2, "searched and expeceted should be equal")
+	}
+}

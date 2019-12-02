@@ -1,9 +1,11 @@
 package search
 
-import "sync"
-
 // ClearIndex clears indices and documents by making new maps for each.
 func ClearIndex() {
-	indices = indexType{indexMapType{}, sync.RWMutex{}}
-	documents = documentType{documentMapType{}, sync.RWMutex{}}
+	indices.lock.Lock()
+	documents.lock.Lock()
+	indices.indexMap = indexMapType{}
+	documents.documentMap = documentMapType{}
+	documents.lock.Unlock()
+	indices.lock.Unlock()
 }
