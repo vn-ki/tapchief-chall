@@ -10,6 +10,8 @@ This repo contains the solution to the challenge by TapChief, listed below.
 >
 > Given a word to search for, it lists out the top 10 paragraphs in which the word is present
 
+Hosted at: https://tapchief-chall.herokuapp.com
+
 ## Building
 
 ```
@@ -23,18 +25,21 @@ Go to http://localhost:8080
 
 ### POST: /api/index
 
-Params:
+#### Params:
 
 para: The paragraph to be indexed.
 
+#### Description
 
 This endpoint indexes a paragraph. A single paragraph can contain multiple documents seperated by 2 newlines (`"\n\n"`).
 
 ### GET: /api/search
 
-Params:
+#### Params:
 
 query: The word to be searched.
+
+#### Description
 
 This endpoint searches for a word in the all the documents and returns the documents which match with the position of the word.
 
@@ -58,7 +63,9 @@ Example:
 
 ### GET: /api/clear
 
-Params: None
+#### Params: None
+
+#### Description
 
 This endpoint clears all the indexed documents.
 
